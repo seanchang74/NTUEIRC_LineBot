@@ -1,0 +1,1 @@
+web: gunicorn --pythonpath ntueircbot ntueircbot.wsgi
