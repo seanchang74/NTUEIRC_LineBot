@@ -26,7 +26,6 @@ jupyter-console==6.1.0
 jupyter-core==4.6.3
 line-bot-sdk==1.16.0
 MarkupSafe==1.1.1
-menuinst==1.4.16
 mistune==0.8.4
 nbconvert==5.6.1
 nbformat==5.0.7
