@@ -39,7 +39,7 @@ def callback(request):
                     func.manageForm(event, mtext, user_id)
                 elif mtext == '@個人資料清除':
                     func.sendCancel(event, user_id)
-                elif mtext[:11] == 'ntueircsean' and len(metext) > 11:
+                elif mtext[:11] == 'ntueircsean' and len(mtext) > 11:
                     func.pushMessage(event, mtext)
                 else:
                     func.sendQnA(event, mtext)

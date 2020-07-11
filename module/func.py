@@ -1,7 +1,7 @@
 from django.conf import settings
 
 from linebot import LineBotApi
-from linebot.models import TextSendMessage
+from linebot.models import TextSendMessage, TemplateSendMessage, ButtonsTemplate, URITemplateAction, ConfirmTemplate, PostbackTemplateAction
 
 import http.client, json
 from ircbot.models import users, registerform
