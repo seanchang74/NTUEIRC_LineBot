@@ -15,5 +15,6 @@ class registerform(models.Model):
     lineid = models.CharField(max_length=30, null=False)
     willing = models.CharField(max_length=5, null=False)
     firsttime = models.CharField(max_length=5, null=False)
+    
     def __str__(self):
-        return self.cid
+        return self.id

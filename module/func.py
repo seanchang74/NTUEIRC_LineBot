@@ -15,9 +15,7 @@ method = "/qnamaker/knowledgebases/" + kb + "/generateAnswer"
 
 def sendUse(event):  #@使用說明
     try:
-        text1 ='''
-可以直接輸入你想詢問的問題，任何有關社團的問題我都會為你解答哦!
-               '''
+        text1 ="可以直接輸入你想詢問的問題，任何有關社團的問題我都會為你解答哦!"
         message = TextSendMessage(
             text = text1
         )
@@ -29,20 +27,21 @@ def sendData(event, user_id):
     try:
         if not (registerform.objects.filter(cid=user_id).exists()):
             message = TemplateSendMessage(
-                alt_text = "填寫入社意願調查單",
+                alt_text = '填寫入社意願調查單',
                 template = ButtonsTemplate(
-                thumbnail_image_url='https://i.imgur.com/CBilkHy.png',
-                title="填寫入社意願調查單",
-                text="感謝您願意抽空填寫這份表單，表單資料將在招生期結束後主動銷毀。",
-                actions=[URITemplateAction(label="前往填寫",
-                uri='https://liff.line.me/1654433071-EbJxZwlW')]
+                    thumbnail_image_url='https://i.imgur.com/CBilkHy.png',
+                    title='填寫入社意願調查單',
+                    text='感謝您願意抽空填寫這份表單，表單資料將在招生期結束後主動銷毀',
+                    actions=[
+                        URITemplateAction(label='前往填寫', uri='https://liff.line.me/1654433071-EbJxZwlW')
+                    ]
                 )
             )
         else:
-            message = TextSendMessage(text = "你已經填寫過表單囉!")
+            message = TextSendMessage(text = '你已經填寫過表單囉!')
         line_bot_api.reply_message(event.reply_token,message)
     except:
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text="好像有點問題，請再試一次"))
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='資料處理發生錯誤！'))
 
 def manageForm(event, mtext, user_id):
     try:
@@ -70,7 +69,7 @@ def manageForm(event, mtext, user_id):
                 )
         line_bot_api.reply_message(event.reply_token,message)
     except:
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text="資料處理發生錯誤！"))
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='資料處理發生錯誤！'))
         
 def sendCancel(event, user_id):
     try:
@@ -97,22 +96,22 @@ def sendCancel(event, user_id):
                 TemplateSendMessage(
                 alt_text="表單資料清除確認",
                 template=ConfirmTemplate(
-                text="你確定要清除表單資料嗎?",
-                actions=[
-                    PostbackTemplateAction(
-                        label='是',
-                        data='action=yes'),
-                    PostbackTemplateAction(
-                        label='否',
-                        data='action=no')]
+                    text="你確定要清除表單資料嗎?",
+                    actions=[
+                        PostbackTemplateAction(
+                            label='是',
+                            data='action=yes'),
+                        PostbackTemplateAction(
+                            label='否',
+                            data='action=no')]
                     )
                 )
             ]
         else:
-            message = TextSendMessage(text = "您目前尚未填寫入社意願調查表!")
+            message = TextSendMessage(text = '您目前尚未填寫入社意願調查表!')
         line_bot_api.reply_message(event.reply_token,message)
     except:
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text="資料處理發生錯誤！"))
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='資料處理發生錯誤！'))
         
 def sendYes(event, user_id):
     try:
@@ -122,7 +121,7 @@ def sendYes(event, user_id):
             text = "您的資料已成功清除。\n期待您再次填寫表單，謝謝!")
         line_bot_api.reply_message(event.reply_token, message)
     except:
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text="資料處理發生錯誤！"))
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text='資料處理發生錯誤！'))
         
 def pushMessage(event, mtext):  ##推播訊息給所有顧客
     try:
