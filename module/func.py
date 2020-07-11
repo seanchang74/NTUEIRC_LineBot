@@ -31,19 +31,18 @@ def sendData(event, user_id):
             message = TemplateSendMessage(
                 alt_text = "填寫入社意願調查單",
                 template = ButtonsTemplate(
-                thumbnail_image_url='https://i.imgur.com/CBilkHy.png'
-                title='填寫入社意願調查單'
-                text='感謝您願意抽空填寫這份表單，表單資料將在招生期結束後主動銷毀。'
-                actions=[URITemplateAction(label='前往填寫',
+                thumbnail_image_url='https://i.imgur.com/CBilkHy.png',
+                title="填寫入社意願調查單",
+                text="感謝您願意抽空填寫這份表單，表單資料將在招生期結束後主動銷毀。",
+                actions=[URITemplateAction(label="前往填寫",
                 uri='https://liff.line.me/1654433071-EbJxZwlW')]
                 )
             )
         else:
-            message = TextSendMessage(text = '你已經填寫過表單了，如果有資料需要更改，
-            可以點選下方的表單資料清除選項，重新填寫表單')
+            message = TextSendMessage(text = "你已經填寫過表單囉!")
         line_bot_api.reply_message(event.reply_token,message)
     except:
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='好像有點問題，請再試一次'))
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text="好像有點問題，請再試一次"))
 
 def manageForm(event, mtext, user_id):
     try:
@@ -69,9 +68,9 @@ def manageForm(event, mtext, user_id):
         message = TextSendMessage(  #顯示表單資料
                     text = text1
                 )
-                line_bot_api.reply_message(event.reply_token,message)
+        line_bot_api.reply_message(event.reply_token,message)
     except:
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='資料處理發生錯誤！'))
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text="資料處理發生錯誤！"))
         
 def sendCancel(event, user_id):
     try:
@@ -96,9 +95,9 @@ def sendCancel(event, user_id):
                     text = text1
                 ),
                 TemplateSendMessage(
-                alt_text='表單資料清除確認',
+                alt_text="表單資料清除確認",
                 template=ConfirmTemplate(
-                text='你確定要清除表單資料嗎?',
+                text="你確定要清除表單資料嗎?",
                 actions=[
                     PostbackTemplateAction(
                         label='是',
@@ -110,10 +109,10 @@ def sendCancel(event, user_id):
                 )
             ]
         else:
-            message = TextSendMessage(text = '您目前尚未填寫入社意願調查表!')
+            message = TextSendMessage(text = "您目前尚未填寫入社意願調查表!")
         line_bot_api.reply_message(event.reply_token,message)
     except:
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='資料處理發生錯誤！'))
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text="資料處理發生錯誤！"))
         
 def sendYes(event, user_id):
     try:
@@ -123,7 +122,7 @@ def sendYes(event, user_id):
             text = "您的資料已成功清除。\n期待您再次填寫表單，謝謝!")
         line_bot_api.reply_message(event.reply_token, message)
     except:
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text='資料處理發生錯誤！'))
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text="資料處理發生錯誤！"))
         
 def pushMessage(event, mtext):  ##推播訊息給所有顧客
     try:
@@ -135,7 +134,7 @@ def pushMessage(event, mtext):  ##推播訊息給所有顧客
             )
             line_bot_api.push_message(to=user.uid, messages=[message])  #推播訊息
     except:
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='資料處理發生錯誤！'))        
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text="資料處理發生錯誤！"))        
         
 def sendQnA(event, mtext):  #QnA
     question = {
@@ -153,7 +152,7 @@ def sendQnA(event, mtext):  #QnA
     result = json.loads(response.read())
     result1 = result['answers'][0]['answer']
     if 'No good match' in result1:
-        text1 = '咦!你問的是關於社團的問題嗎?\n要不要換句話再問問看'
+        text1 = "咦!你問的是關於社團的問題嗎?\n要不要換句話再問問看"
         #將沒有解答的問題寫入資料庫
         userid = event.source.user_id
         unit = users.objects.create(uid=userid, question=mtext)
