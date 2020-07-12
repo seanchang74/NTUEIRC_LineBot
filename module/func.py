@@ -33,7 +33,7 @@ def sendData(event, user_id):
                     title='填寫入社意願調查單',
                     text='感謝您願意抽空填寫這份表單，表單資料將在招生期結束後主動銷毀',
                     actions=[
-                        URITemplateAction(label='前往填寫', uri='https://liff.line.me/1654433071-EbJxZwlW')
+                        URITemplateAction(label='前往填寫', uri='https://liff.line.me/1654433071-DPGqaOv2')
                     ]
                 )
             )
