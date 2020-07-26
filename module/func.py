@@ -120,7 +120,22 @@ def sendYes(event, user_id):
     try:
         line_bot_api.push_message(admin_uid, TextSendMessage(text='系統收到新生欲清除資料，資料如下'))
         datadel = registerform.objects.get(cid=user_id)
-        line_bot_api.push_message(admin_uid, datadel)
+        cname = datadel.name
+        cphone = datadel.phone
+        cemail = datadel.email
+        cfbname = datadel.fbname
+        clineid = datadel.lineid
+        cwilling = datadel.willing
+        cfirsttime = datadel.firsttime
+        text1 = "您填寫的資料如下:"
+        text1 +="\n 姓名:" + cname
+        text1 +="\n 電話:" + cphone
+        text1 +="\n 電子郵件:" + cemail
+        text1 +="\n FB名稱:" + cfbname
+        text1 +="\n LINE ID:" + clineid
+        text1 +="\n 目前入社意願:" + cwilling
+        text1 +="\n 是否想參加體驗社課:" + cfirsttime
+        line_bot_api.push_message(admin_uid, TextSendMessage(text=text1))
         datadel.delete()
         message = TextSendMessage(
             text = "您的資料已成功清除。\n期待您再次填寫表單，謝謝!")
