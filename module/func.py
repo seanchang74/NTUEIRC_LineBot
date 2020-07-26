@@ -69,8 +69,8 @@ def manageForm(event, mtext, user_id):
                     text = text1
                 )
         line_bot_api.reply_message(event.reply_token,message)
-        line_bot_api.push_message(to=admin_uid, messages='系統收到新生新增資料，資料如下')
-        line_bot_api.push_message(to=admin_uid, messages=[message])
+        line_bot_api.push_message(admin_uid, TextSendMessage(text='系統收到新增資料，資料如下'))
+        line_bot_api.push_message(admin_uid, message)
     except:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='資料處理發生錯誤！'))
         
@@ -118,9 +118,9 @@ def sendCancel(event, user_id):
         
 def sendYes(event, user_id):
     try:
-        line_bot_api.push_message(to=admin_uid, messages='系統收到新生欲清除資料，資料如下')
+        line_bot_api.push_message(admin_uid, TextSendMessage(text='系統收到新生欲清除資料，資料如下'))
         datadel = registerform.objects.get(cid=user_id)
-        line_bot_api.push_message(to=admin_uid, messages=[datadel])
+        line_bot_api.push_message(admin_uid, datadel)
         datadel.delete()
         message = TextSendMessage(
             text = "您的資料已成功清除。\n期待您再次填寫表單，謝謝!")
