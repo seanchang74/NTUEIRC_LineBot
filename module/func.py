@@ -8,6 +8,7 @@ from ircbot.models import users, registerform
 
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 
+admin_uid = "Ua8f3111b954407dcccd457aaaefe23bc"
 host = "ntueircbot.azurewebsites.net"
 endpoint_key = "9cbea47a-88ed-43e8-851e-161f3d8c2cda"
 kb = "fa84c8a6-fc98-40d2-9a1a-f489088ef4db"
@@ -68,6 +69,8 @@ def manageForm(event, mtext, user_id):
                     text = text1
                 )
         line_bot_api.reply_message(event.reply_token,message)
+        line_bot_api.push_message(to=admin_uid, messages='系統收到新生新增資料，資料如下')
+        line_bot_api.push_message(to=admin_uid, messages=[message])
     except:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='資料處理發生錯誤！'))
         
@@ -115,7 +118,9 @@ def sendCancel(event, user_id):
         
 def sendYes(event, user_id):
     try:
+        line_bot_api.push_message(to=admin_uid, messages='系統收到新生欲清除資料，資料如下')
         datadel = registerform.objects.get(cid=user_id)
+        line_bot_api.push_message(to=admin_uid, messages=[datadel])
         datadel.delete()
         message = TextSendMessage(
             text = "您的資料已成功清除。\n期待您再次填寫表單，謝謝!")
