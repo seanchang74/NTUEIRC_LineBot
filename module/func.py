@@ -9,9 +9,9 @@ from ircbot.models import users, registerform
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 
 admin_uid = "Ua8f3111b954407dcccd457aaaefe23bc"
-host = "ntueircbot.azurewebsites.net"
-endpoint_key = "9cbea47a-88ed-43e8-851e-161f3d8c2cda"
-kb = "fa84c8a6-fc98-40d2-9a1a-f489088ef4db"
+host = "ntueircbot02.azurewebsites.net"
+endpoint_key = "8aa14541-c826-43de-8585-d1e388b4f96e"
+kb = "ba477641-32e6-4681-8385-c1c84c52c445"
 method = "/qnamaker/knowledgebases/" + kb + "/generateAnswer"
 
 def sendUse(event):  #@使用說明
