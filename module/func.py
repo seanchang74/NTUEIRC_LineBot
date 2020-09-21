@@ -9,14 +9,14 @@ from ircbot.models import users, registerform
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 
 admin_uid = "Ua8f3111b954407dcccd457aaaefe23bc"
-host = "ntueircbot02.azurewebsites.net"
+'''host = "ntueircbot02.azurewebsites.net"
 endpoint_key = "8aa14541-c826-43de-8585-d1e388b4f96e"
 kb = "ba477641-32e6-4681-8385-c1c84c52c445"
-method = "/qnamaker/knowledgebases/" + kb + "/generateAnswer"
+method = "/qnamaker/knowledgebases/" + kb + "/generateAnswer"'''
 
 def sendUse(event):  #@使用說明
     try:
-        text1 ="可以直接輸入你想詢問的問題，任何有關社團的問題我都會為你解答哦!"
+        text1 ="對於初次接觸的使用者，可以透過下方的圖文選單，點選你想要使用的功能\n如果有其他問題想要諮詢的話，可以私訊社團臉書粉專，我們會盡快為你解惑!"
         message = TextSendMessage(
             text = text1
         )
@@ -26,7 +26,7 @@ def sendUse(event):  #@使用說明
 
 def sendData(event, user_id):
     try:
-        if not (registerform.objects.filter(cid=user_id).exists()):
+        '''if not (registerform.objects.filter(cid=user_id).exists()):'''
             message = TemplateSendMessage(
                 alt_text = '填寫正式入社表單',
                 template = ButtonsTemplate(
@@ -38,8 +38,8 @@ def sendData(event, user_id):
                     ]
                 )
             )
-        else:
-            message = TextSendMessage(text = '你已經填寫過表單囉!')
+        '''else:
+            message = TextSendMessage(text = '你已經填寫過表單囉!')'''
         line_bot_api.reply_message(event.reply_token,message)
     except:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='資料處理發生錯誤！'))
@@ -55,10 +55,10 @@ def manageForm(event, mtext, user_id):
         cfbname = flist[5]
         clineid = flist[6]
         cfirsttime = flist[7]
-        unit = registerform.objects.create(cid=user_id, name=cname, studentid=cstudentid, gender=cgender, 
+        '''unit = registerform.objects.create(cid=user_id, name=cname, studentid=cstudentid, gender=cgender, 
         fbname=cfbname, lineid=clineid, department=cdepartment, birth=cbirth, firsttime=cfirsttime)
-        unit.save()
-        text1 = "已收到您的資料，資料如下:"
+        unit.save()'''
+        text1 = "我們已收到你的回覆，資料如下:"
         text1 +="\n 姓名:" + cname
         text1 +="\n 學號:" + cstudentid
         text1 +="\n 性別:" + cgender
@@ -71,12 +71,11 @@ def manageForm(event, mtext, user_id):
                     text = text1
                 )
         line_bot_api.reply_message(event.reply_token,message)
-        line_bot_api.push_message(admin_uid, TextSendMessage(text='系統收到新增資料，資料如下'))
         line_bot_api.push_message(admin_uid, message)
     except:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='資料處理發生錯誤！'))
         
-"""def sendCancel(event, user_id):
+'''def sendCancel(event, user_id):
     try:
         if registerform.objects.filter(cid=user_id).exists():
             formdata = registerform.objects.get(cid=user_id)
@@ -183,4 +182,4 @@ def sendQnA(event, mtext):  #QnA
     message = TextSendMessage(
         text = text1
     )
-    line_bot_api.reply_message(event.reply_token,message)"""
+    line_bot_api.reply_message(event.reply_token,message)'''
