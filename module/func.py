@@ -28,11 +28,11 @@ def sendData(event, user_id):
     try:
         if not (registerform.objects.filter(cid=user_id).exists()):
             message = TemplateSendMessage(
-                alt_text = '填寫入社意願調查單',
+                alt_text = '填寫正式入社表單',
                 template = ButtonsTemplate(
                     thumbnail_image_url='https://i.imgur.com/CBilkHy.png',
-                    title='填寫入社意願調查單',
-                    text='感謝您願意抽空填寫這份表單，表單資料將在招生期結束後主動銷毀',
+                    title='填寫正式入社表單',
+                    text='歡迎加入國北資研的大家庭!',
                     actions=[
                         URITemplateAction(label='前往填寫', uri='https://liff.line.me/1654433071-DPGqaOv2')
                     ]
@@ -48,23 +48,25 @@ def manageForm(event, mtext, user_id):
     try:
         flist = mtext[3:].split('/')
         cname = flist[0]
-        cphone = flist[1]
-        cemail = flist[2]
-        cfbname = flist[3]
-        clineid = flist[4]
-        cwilling = flist[5]
-        cfirsttime = flist[6]
-        unit = registerform.objects.create(cid=user_id, name=cname, phone=cphone, email=cemail, 
-        fbname=cfbname, lineid=clineid, willing=cwilling, firsttime=cfirsttime)
+        cgender = flist[1]
+        cbirth = flist[2]
+        cdepartment = flist[3]
+        cstudentid = flist[4]
+        cfbname = flist[5]
+        clineid = flist[6]
+        cfirsttime = flist[7]
+        unit = registerform.objects.create(cid=user_id, name=cname, studentid=cstudentid, gender=cgender, 
+        fbname=cfbname, lineid=clineid, department=cdepartment, birth=cbirth, firsttime=cfirsttime)
         unit.save()
         text1 = "已收到您的資料，資料如下:"
         text1 +="\n 姓名:" + cname
-        text1 +="\n 電話:" + cphone
-        text1 +="\n 電子郵件:" + cemail
+        text1 +="\n 學號:" + cstudentid
+        text1 +="\n 性別:" + cgender
+        text1 +="\n 系級:" + cdepartment
+        text1 +="\n 生日:" + cbirth
         text1 +="\n FB名稱:" + cfbname
         text1 +="\n LINE ID:" + clineid
-        text1 +="\n 目前入社意願:" + cwilling
-        text1 +="\n 是否想參加體驗社課:" + cfirsttime
+        text1 +="\n 未來欲參加的班級:" + cfirsttime
         message = TextSendMessage(  #顯示表單資料
                     text = text1
                 )
@@ -74,7 +76,7 @@ def manageForm(event, mtext, user_id):
     except:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='資料處理發生錯誤！'))
         
-def sendCancel(event, user_id):
+"""def sendCancel(event, user_id):
     try:
         if registerform.objects.filter(cid=user_id).exists():
             formdata = registerform.objects.get(cid=user_id)
@@ -181,4 +183,4 @@ def sendQnA(event, mtext):  #QnA
     message = TextSendMessage(
         text = text1
     )
-    line_bot_api.reply_message(event.reply_token,message)
+    line_bot_api.reply_message(event.reply_token,message)"""
