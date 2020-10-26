@@ -21,8 +21,8 @@ def sendCourse(event):  #@使用說明
         text3 ="進階班\n1.網頁基礎知識介紹\n2.擷取JSON/HTML格式資料\n3.發送API請求\n4.Numpy&Pandas介紹\n5.資料視覺化\n6.瀏覽器自動化"
         message = TextSendMessage(
             text = text1,
-            base = text2,
-            advanced = text3,
+            text = text2,
+            text = text3,
         )
         line_bot_api.reply_message(event.reply_token,message)
     except:

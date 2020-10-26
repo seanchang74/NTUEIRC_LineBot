@@ -40,7 +40,7 @@ def callback(request):
                 elif mtext[:11] == 'ntueircsean' and len(mtext) > 11:
                     func.pushMessage(event, mtext)
                 else:
-                    func.sendWait(event, mtext)
+                    func.sendWait(event)
 
         return HttpResponse()
 
