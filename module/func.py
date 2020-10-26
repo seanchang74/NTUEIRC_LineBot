@@ -4,7 +4,7 @@ from linebot import LineBotApi
 from linebot.models import TextSendMessage, TemplateSendMessage, ButtonsTemplate, URITemplateAction, ConfirmTemplate, PostbackTemplateAction
 
 import http.client, json
-from ircbot.models import users, registerform
+#from ircbot.models import users, registerform
 
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 
@@ -19,15 +19,11 @@ def sendCourse(event):  #@使用說明
         text1 ="以下為我們這學期的課程規劃:"
         text2 ="基礎班\n1.認識Python\n2.邏輯與迴圈\n3.串列與字典\n4.函式與例外處理\n5.檔案的寫入與讀取"
         text3 ="進階班\n1.網頁基礎知識介紹\n2.擷取JSON/HTML格式資料\n3.發送API請求\n4.Numpy&Pandas介紹\n5.資料視覺化\n6.瀏覽器自動化"
-        message = [TextSendMessage(
-            text = text1
+        message = TextSendMessage(
+            text = text1,
+            base = text2,
+            advanced = text3,
         )
-        TextSendMessage(
-            text = text2
-        )
-        TextSendMessage(
-            text = text3
-        )]
         line_bot_api.reply_message(event.reply_token,message)
     except:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='系統好像有點問題，請再試一次!'))
@@ -35,17 +31,17 @@ def sendCourse(event):  #@使用說明
 def sendData(event, user_id):
     try:
         '''if not (registerform.objects.filter(cid=user_id).exists()):'''
-            message = TemplateSendMessage(
-                alt_text = '填寫正式入社表單',
-                template = ButtonsTemplate(
-                    thumbnail_image_url='https://i.imgur.com/CBilkHy.png',
-                    title='填寫正式入社表單',
-                    text='歡迎加入國北資研的大家庭!',
-                    actions=[
-                        URITemplateAction(label='前往填寫', uri='https://liff.line.me/1654949355-0OZEoq6d')
-                    ]
-                )
+        message = TemplateSendMessage(
+            alt_text = '填寫正式入社表單',
+            template = ButtonsTemplate(
+                thumbnail_image_url='https://i.imgur.com/CBilkHy.png',
+                title='填寫正式入社表單',
+                text='歡迎加入國北資研的大家庭!',
+                actions=[
+                    URITemplateAction(label='前往填寫', uri='https://liff.line.me/1654949355-0OZEoq6d')
+                ]
             )
+        )
         '''else:
             message = TextSendMessage(text = '你已經填寫過表單囉!')'''
         line_bot_api.reply_message(event.reply_token,message)
@@ -55,17 +51,17 @@ def sendData(event, user_id):
 def sendLeave(event, user_id):
     try:
         '''if not (registerform.objects.filter(cid=user_id).exists()):'''
-            message = TemplateSendMessage(
-                alt_text = '填寫社團請假表單',
-                template = ButtonsTemplate(
-                    thumbnail_image_url='https://i.imgur.com/CBilkHy.png',
-                    title='填寫社團請假表單',
-                    text='請假的同學一定要記得補課哦!',
-                    actions=[
-                        URITemplateAction(label='前往填寫', uri='https://liff.line.me/1654949349-byenoVgg')
-                    ]
-                )
+        message = TemplateSendMessage(
+            alt_text = '填寫社團請假表單',
+            template = ButtonsTemplate(
+                thumbnail_image_url='https://i.imgur.com/CBilkHy.png',
+                title='填寫社團請假表單',
+                text='請假的同學一定要記得補課哦!',
+                actions=[
+                    URITemplateAction(label='前往填寫', uri='https://liff.line.me/1654949349-byenoVgg')
+                ]
             )
+        )
         '''else:
             message = TextSendMessage(text = '你已經填寫過表單囉!')'''
         line_bot_api.reply_message(event.reply_token,message)

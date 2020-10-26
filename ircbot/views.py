@@ -6,7 +6,6 @@ from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import MessageEvent, PostbackEvent
 from urllib.parse import parse_qsl
-from ircbot.models import users
 from module import func
 
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
