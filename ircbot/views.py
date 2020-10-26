@@ -27,6 +27,10 @@ def callback(request):
             if isinstance(event, MessageEvent):
                 user_id = event.source.user_id
                 mtext = event.message.text
+            if isinstance(event, PostbackEvent):
+                backdata = dict(parse_qsl(event.postback.data))
+                if backdata.get('action') == 'yes':
+                    ques = func.sendYes(event, event.source.user_id)
                 if mtext == '@課程安排':
                     func.sendCourse(event)
                 elif mtext == '@我想入社':
@@ -39,6 +43,10 @@ def callback(request):
                     func.manageForm2(event, mtext, user_id)
                 elif mtext[:11] == 'ntueircsean' and len(mtext) > 11:
                     func.pushMessage(event, mtext)
+                elif mtext == '@我想詢問':
+                    func.callService(event)
+                elif ques == 1:
+                    ques = func.saveQuestion(event, mtext, user_id)
                 else:
                     func.sendWait(event)
 

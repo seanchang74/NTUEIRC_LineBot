@@ -9,6 +9,8 @@ import http.client, json
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 
 admin_uid = "Ua8f3111b954407dcccd457aaaefe23bc"
+jessie_uid = "U999d3622bda61a1dc556402a6d9547b5"
+jenny_uid = "U0ebb43c054814434202266e15eab0c81"
 '''host = "ntueircbot02.azurewebsites.net"
 endpoint_key = "8aa14541-c826-43de-8585-d1e388b4f96e"
 kb = "ba477641-32e6-4681-8385-c1c84c52c445"
@@ -94,6 +96,8 @@ def manageForm(event, mtext, user_id):
                 )
         line_bot_api.reply_message(event.reply_token,message)
         line_bot_api.push_message(admin_uid, message)
+        line_bot_api.push_message(jessie_uid, message)
+        line_bot_api.push_message(jenny_uid, message)
     except:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='資料處理發生錯誤！'))
 
@@ -119,19 +123,63 @@ def manageForm2(event, mtext, user_id):
                 )
         line_bot_api.reply_message(event.reply_token,message)
         line_bot_api.push_message(admin_uid, message)
+        line_bot_api.push_message(jessie_uid, message)
+        line_bot_api.push_message(jenny_uid_uid, message)
     except:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='資料處理發生錯誤！'))
 
 def sendWait(event):
     try:
-        text1 = "現在聊天機器人沒有客服功能，如有問題歡迎私訊臉書粉專"
+        text1 = "如有問題可以點選圖文選單中的我想詢問\n此外也歡迎直接私訊臉書粉專或IG官方帳號!"
         message = TextSendMessage(
             text = text1
         )
         line_bot_api.reply_message(event.reply_token,message)
     except:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='系統好像有點問題，請再試一次!'))
-       
+
+def callService(event):
+    try:
+        message = TemplateSendMessage(
+                    alt_text="轉接真人",
+                    template=ConfirmTemplate(
+                        text="請問需要幫你轉接社長大人嗎?",
+                        actions=[
+                            PostbackTemplateAction(
+                                label='麻煩了',
+                                data='action=yes'),
+                            PostbackTemplateAction(
+                                label='不需要',
+                                data='action=no')]
+                        )
+                    )
+        line_bot_api.reply_message(event.reply_token,message)
+    except:
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='系統好像有點問題，請再試一次!'))
+    
+def sendYes(event):
+    text1 = "請輸入你的問題，社長會盡快回覆你~"
+    message = TextSendMessage(
+            text = text1
+        )
+    line_bot_api.reply_message(event.reply_token,message)
+    return ques = 1
+
+def saveQuestion(event,mtext,user_id):
+    try:
+        profile = line_bot_api.get_profile(user_id)
+        message = TextSendMessage(
+                text = "剛剛"
+                text += profile.display_name
+                text += "問說:\n"
+                text += mtext
+                text += "\n請盡快回覆")
+        return ques = 0
+        line_bot_api.reply_message(admin_uid,message)
+        line_bot_api.reply_message(event.reply_token,TextSendMessage("已將你的問題通知社長大人，請靜待回覆~謝謝!")
+    except:
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='系統好像有點問題，請再試一次!'))
+        
 '''def sendCancel(event, user_id):
     try:
         if registerform.objects.filter(cid=user_id).exists():
