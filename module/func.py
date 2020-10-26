@@ -16,13 +16,11 @@ method = "/qnamaker/knowledgebases/" + kb + "/generateAnswer"'''
 
 def sendCourse(event):  #@使用說明
     try:
-        text1 ="以下為我們這學期的課程規劃:"
-        text2 ="基礎班\n1.認識Python\n2.邏輯與迴圈\n3.串列與字典\n4.函式與例外處理\n5.檔案的寫入與讀取"
-        text3 ="進階班\n1.網頁基礎知識介紹\n2.擷取JSON/HTML格式資料\n3.發送API請求\n4.Numpy&Pandas介紹\n5.資料視覺化\n6.瀏覽器自動化"
+        text1 ="以下為我們這學期的課程規劃:\n"
+        text1 +="基礎班\n1.認識Python\n2.邏輯與迴圈\n3.串列與字典\n4.函式與例外處理\n5.檔案的寫入與讀取\n"
+        text1 +="進階班\n1.網頁基礎知識介紹\n2.擷取JSON/HTML格式資料\n3.發送API請求\n4.Numpy&Pandas介紹\n5.資料視覺化\n6.瀏覽器自動化"
         message = TextSendMessage(
-            text = text1,
-            text = text2,
-            text = text3,
+            text = text1
         )
         line_bot_api.reply_message(event.reply_token,message)
     except:
