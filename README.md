@@ -1,4 +1,6 @@
 # NTUEIRC LineBot
-## Using Python Django
-## Demo Video URL : https://youtu.be/ElIj3fZd_04
-*Copyright by SeanChang(張子賢)*
+**Notice: LINE offical account for NTUEIRC**
+
+> Demo Video URL : https://youtu.be/ElIj3fZd_04
+
+*Copyright 2020 NTUECS, SeanChang*
