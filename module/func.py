@@ -8,12 +8,10 @@ from ircbot.models import users
 
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 
-admin_uid = "Ua8f3111b954407dcccd457aaaefe23bc"
-jessie_uid = "U999d3622bda61a1dc556402a6d9547b5"
-jenny_uid = "U0ebb43c054814434202266e15eab0c81"
-'''host = "ntueircbot02.azurewebsites.net"
-endpoint_key = "8aa14541-c826-43de-8585-d1e388b4f96e"
-kb = "ba477641-32e6-4681-8385-c1c84c52c445"
+admin_uid = "Admin_Uid"
+'''host = "Your_Azure_Host"
+endpoint_key = Endpoint_Key"
+kb = "Kb_token"
 method = "/qnamaker/knowledgebases/" + kb + "/generateAnswer"'''
 
 def sendCourse(event):  #@使用說明
