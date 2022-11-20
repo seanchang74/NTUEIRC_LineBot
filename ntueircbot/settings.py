@@ -20,9 +20,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '%m+ak7vt+k%=w5w7abo$xeq4==w5%2#x3wuo#uus+j*e@_*ujn'
-LINE_CHANNEL_ACCESS_TOKEN = 'HnMZWwjV6cCkYI34WAHK0GO4RiLVOOp/RKL7j91rlH5CLH4hfktIp4ijnM/7O4sfPwcFGdalGscXIpqbT+INF5+KumNR2W4/nuIB+otVAUncQe5M27+LuEVmXCZDoUl7Q+yuhMtdX7RVp5jisXy+iAdB04t89/1O/w1cDnyilFU='
-LINE_CHANNEL_SECRET = '103e095e0cf5170d0ac8a64c200c2484'
+SECRET_KEY = 'Your_Secret_Key'
+LINE_CHANNEL_ACCESS_TOKEN = 'Your_Line_Access_Token'
+LINE_CHANNEL_SECRET = 'Your_Line_Channel_Secret'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
